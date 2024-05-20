@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="../img/icon.ico">
+    <link rel="stylesheet" type="text/css" href="../css/stylemain.css">
+    <title>ТУ- Каталог товаров</title>
+    <script>
+        function myFunction() {
+            var inputPosition, inputName, inputCountry, filterPosition, filterName, filterCountry, table, tr, tdPosition, tdName, tdCountry, i, txtValuePosition, txtValueName, txtValueCountry;
+            inputPosition = document.getElementById("myPosition");
+            inputName = document.getElementById("medName");
+            inputCountry = document.getElementById("Country");
+            filterPosition = inputPosition.value.toUpperCase();
+            filterName = inputName.value.toUpperCase();
+            filterCountry = inputCountry.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                tdPosition = tr[i].getElementsByTagName("td")[0];
+                tdName = tr[i].getElementsByTagName("td")[1];
+                tdCountry = tr[i].getElementsByTagName("td")[4];
+                if (tdPosition && tdName && tdCountry) {
+                    txtValuePosition = tdPosition.textContent || tdPosition.innerText;
+                    txtValueName = tdName.textContent || tdName.innerText;
+                    txtValueCountry = tdCountry.textContent || tdCountry.innerText;
+                    if ((txtValuePosition.toUpperCase().indexOf(filterPosition) > -1 || filterPosition == "") &&
+                        (txtValueName.toUpperCase().indexOf(filterName) > -1 || filterName == "") &&
+                        (txtValueCountry.toUpperCase().indexOf(filterCountry) > -1 || filterCountry == "")) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+    <script>
+        function addToCart(button) {
+            const row = button.parentNode.parentNode;
+            const name = row.getElementsByTagName('td')[1].textContent;
+            const price = row.getElementsByTagName('td')[5].textContent;
+
+            const amount = prompt(`Введите количество для покупки товара "${name}" по цене ${price} руб.`);
+
+            if (amount !== null && amount !== "" && Number(amount) > 0) {
+                const order = {
+                    name: name,
+                    price: price,
+                    amount: amount
+                };
+
+                const orders = JSON.parse(localStorage.getItem("orders")) || [];
+                orders.push(order);
+                localStorage.setItem("orders", JSON.stringify(orders));
+
+                alert(`Товар "${name}" был успешно добавлен в корзину!`);
+            } else {
+                alert(`Количество должно быть больше нуля!`);
+            }
+        }
+    </script>
+    <style>
+        td {
+            position: relative;
+        }
+
+        /*img {
+            display: block;
+            width: 100%;
+        }*/
+
+        /*div {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translate(-50%, 0);
+        }*/
+        button {
+            color: white;
+            background-color: blue;
+            border-radius: 6px;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .btn-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        body {
+            margin: 0;
+            height: 100%;
+
+        }
+        h1 {
+            text-align: center;
+            margin-top: 50px;
+        }
+        table {
+            margin: 50px auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 10px 20px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        input {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            font-size: 16px;
+        }
+        button {
+            margin-left: 10px;
+            padding: 5px 10px;
+            background-color: blue;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover{
+            background-color: red;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a class="TopHomeLink" href="/mainpage">
+                <img class="icon" src="../img/headerUgolok.png" width="220" height="92">
+            </a>
+        </div>
+    </header>
+    <hr>
+    <ul align = "center">
+        <li><a href = "/mainpage">Главная</a></li>
+        <li><a href = "/mainpage/addresses">Адреса</a></li>
+        <li><a href = "/mainpage/myProducts">Мои товары</a></li>
+        <li><b href = "/mainpage/productlist">Каталог товаров</b></li>
+        <li><a href = "/mainpage/productsFromUsers">Товары от пользователей</a></li>
+        <li><a href = "/mainpage/basket">Корзина</a></li>
+        <li><a href = "/mainpage/techSupport">Тех. поддержка</a></li>
+    </ul>
+    <h1>Список товаров</h1>
+    <form>
+        <label for="myPosition">Выберите раздел:</label>
+        <select id="myPosition" onchange="myFunction()" title="Выберите раздел...">
+            <option value="">Все разделы</option>
+            <option value="Кухонные принадлежности">Кухонные принадлежности</option>
+            <option value="Мода">Мода</option>
+            <option value="Дом и сад">Дом и сад</option>
+            <option value="Спорт и отдых">Спорт и отдых</option>
+            <option value="Игрушки и товары для детей">Игрушки и товары для детей</option>
+            <option value="Развлечения">Развелечения</option>
+            <option value="Электроника">Электроника</option>
+            <option value="Красота и здоровье">Красота и здоровье</option>
+        </select>
+        <label for="medName">Поиск по названию:</label>
+        <input type="text" id="medName" onkeyup="myFunction()" placeholder="Поиск..." title="Введите название">
+        <label for="Country">Поиск по стране:</label>
+        <input type="text" id="Country" onkeyup="myFunction()" placeholder="Поиск..." title="Введите страну">
+    </form>
+    <table id="myTable">
+        <thead>
+        <tr>
+            <th>Раздел товара</th>
+            <th>Название</th>
+            <th>Количество</th>
+            <th>Описание</th>
+            <th>Страна производитель</th>
+            <th>Стоимость</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Электроника</td>
+            <td><img src="https://twigo.ru/center/iblock/771/v4xuq0q35w03iwd0kk9yfj8c1eikp19h/peo6z90tb7dmyr2lq4253nqt61qv2309.jpeg" width="150" height="75" alt="Iphone 15 pro">Iphone 15 pro</td>
+            <td>250 штук</td>
+            <td>Новый мощный смартфон</td>
+            <td>США</td>
+            <td>100000 руб.</td>
+            <td><button onclick="addToCart(this)">Добавить в корзину</button></td>
+        </tr>
+        <tr>
+            <td>Мода</td>
+            <td><img src="https://files.gifts.ru/reviewer/tb/14/02898312_2_500.jpg" width="150" height="75" alt="Куртка">Куртка</td>
+            <td>60 штук</td>
+            <td>Осенняя куртка</td>
+            <td>Франция</td>
+            <td>9500 руб.</td>
+            <td><button onclick="addToCart(this)">Добавить в корзину</button></td>
+        </tr>
+        <tr>
+            <td>Красота и здоровье</td>
+            <td><img src="https://annbeautystore.ru/wp-content/uploads/teni-for-me-Annbeauty.jpg" width="150" height="75" alt="Палетка теней">Палетка теней</td>
+            <td>100 штук</td>
+            <td>Оттенки теней гармонично сочетаются друг с другом </td>
+            <td>Россия</td>
+            <td>950 руб.</td>
+            <td><button onclick="addToCart(this)">Добавить в корзину</button></td>
+        <tr>
+            <td>Спорт и отдых</td>
+            <td><img src="https://c.dns-shop.ru/thumb/st4/fit/300/300/b944f1d54764dc7df2cc0158c15a4bc7/91d7eb03894c8af8841ec7471cf1cc064de1eae08821a67d79eccc389558707b.jpg" width="150" height="75" alt="Велосипед">Велосипед</td>
+            <td>200 штук</td>
+            <td>Горный велосипед</td>
+            <td>Россия</td>
+            <td>10999 руб.</td>
+            <td><button onclick="addToCart(this)">Добавить в корзину</button></td>
+        </tr>
+        <tr>
+            <td>Кухонные принадлежности</td>
+            <td><img src="https://storage.yandexcloud.net/mostro-gm-media/73176a90-9f66-2db1-b27b-75105ae45ec5/46EJRAD.jpg" width="150" height="75" alt="Сковорода">Сковорода</td>
+            <td>300 штук.</td>
+            <td>Чугунная сковорода 26 см</td>
+            <td>Россия</td>
+            <td>4499 руб.</td>
+            <td><button onclick="addToCart(this)">Добавить в корзину</button></td>
+        </tr>
+        <tr>
+            <td>Дом и сад</td>
+            <td><img src="https://cdn.domdivanov69.ru/files/imgs/ig1111918/komputernoe-kreslo-driver-22-floktkan-korichnevyi-6tw-24-590x430.jpg" width="150" height="75" alt="Кресло">Кресло</td>
+            <td>300 штук.</td>
+            <td>Игровое кресло, флок</td>
+            <td>Россия</td>
+            <td>12499 руб.</td>
+            <td><button onclick="addToCart(this)">Добавить в корзину</button></td>
+        </tr>
+        <tr>
+            <td>Игрушки и товары для детей</td>
+            <td><img src="https://static.insales-cdn.com/images/products/1/7459/711810339/%D0%B7%D0%B31.webp" width="150" height="75" alt="Конструктор">Конструктор</td>
+            <td>300 штук.</td>
+            <td>Конструктор LEGO, оригинал</td>
+            <td>Дания</td>
+            <td>5499 руб.</td>
+            <td><button onclick="addToCart(this)">Добавить в корзину</button></td>
+        </tr>
+        </tbody>
+        <tr>
+            <td>Развлечения</td>
+            <td><img src="https://main-cdn.sbermegamarket.ru/big1/hlr-system/-14/762/013/921/014/042/100042420359b0.jpg" width="150" height="75" alt="Книга">Книга</td>
+            <td>300 штук.</td>
+            <td>Комплект книг Гарри Поттер, 7 штук</td>
+            <td>Россия</td>
+            <td>7771 руб.</td>
+            <td><button onclick="addToCart(this)">Добавить в корзину</button></td>
+        </tr>
+    </table>
+</body>
+</html>

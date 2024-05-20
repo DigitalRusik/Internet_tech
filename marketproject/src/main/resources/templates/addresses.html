@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" type="image/x-icon" href="../img/icon.ico">
+    <link rel="stylesheet" type="text/css" href="../css/stylemain.css">
+    <title>ТУ- Адреса</title>
+    <style>
+        button {
+            color: white;
+            background-color: green;
+            border-radius: 6px;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .btn-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        body {
+            margin: 0;
+            height: 100%;
+
+        }
+
+        .location {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 20px;
+            background-color: #fff;
+            margin-bottom: 15px;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .location-info {
+            flex: 1;
+        }
+
+        .location-info h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .location-info p {
+            margin: 0;
+        }
+
+        .location-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 30px;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .location-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+    </style>
+</head>
+<body>
+<header>
+    <div class="logo">
+        <a class="TopHomeLink" href="/mainpage">
+            <img class="icon" src="../img/headerUgolok.png" width="220" height="92">
+        </a>
+    </div>
+</header>
+<hr>
+<ul align = "center">
+    <li><a href = "/mainpage">Главная</a></li>
+    <li><b href = "/mainpage/addresses">Адреса</b></li>
+    <li><a href = "/mainpage/myProducts">Мои товары</a></li>
+    <li><a href = "/mainpage/productlist">Каталог товаров</a></li>
+    <li><a href = "/mainpage/productsFromUsers">Товары от пользователей</a></li>
+    <li><a href = "/mainpage/basket">Корзина</a></li>
+    <li><a href = "/mainpage/techSupport">Тех. поддержка</a></li>
+</ul>
+<h1 style="text-align:center">Адреса, где вы можете забрать свои заказы!</h1>
+<div class="location">
+    <div class="location-image">
+        <img src="data:image/jpeg;base64,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" alt="Пункт выдачи 1">
+    </div>
+    <div class="location-info">
+        <h3>Пункт выдачи 1</h3>
+        <p>Адрес: г. Санкт-Петербург, Граждaнский пр-т., 114, корпус 1</p>
+        <p>Телефон: 8 (812) 700-03-03</p>
+    </div>
+</div>
+
+<div class="location">
+    <div class="location-image">
+        <img src="https://static.tildacdn.com/tild3334-6532-4232-b064-633738336165/03_ballon_11.png" alt="Пункт выдачи 2">
+    </div>
+    <div class="location-info">
+        <h3>Пункт выдачи 2</h3>
+        <p>Адрес: г. Санкт-Петербург, пр. Просвещения, 34</p>
+        <p>Телефон: 8 (800) 775-75-33</p>
+    </div>
+</div>
+
+<div class="location">
+    <div class="location-image">
+        <img src="https://static.tildacdn.com/tild3365-6338-4866-b933-353134306161/ozon_2022-02-21_1255.jpg" alt="Пункт выдачи 3">
+    </div>
+    <div class="location-info">
+        <h3>Пункт выдачи 3</h3>
+        <p>Адрес: г. Санкт-Петербург, Комендантский пр., 13, корпус 1</p>
+        <p>Телефон: 8 (800) 775-75-33</p>
+    </div>
+</div>
+
+<div class="location">
+    <div class="location-image">
+        <img src="https://topfranchise.ru/upload/medialibrary/f11/f11626f1b320dcaecb6883d80619736e.jpg" alt="Пункт выдачи 4">
+    </div>
+    <div class="location-info">
+        <h3>Пункт выдачи 4</h3>
+        <p>Адрес: г. Санкт-Петербург,  пр. Художников, 24к1</p>
+        <p>Телефон: +7 (812) 700-03-03</p>
+    </div>
+</div>
+
+<div class="location">
+    <div class="location-image">
+        <img src="https://burobiz-a.akamaihd.net/uploads/images/55614/large_WhatsApp_Image_2020-07-22_at_16.26.12.jpeg" alt="Пункт выдачи 5">
+    </div>
+    <div class="location-info">
+        <h3>Пункт выдачи 5</h3>
+        <p>Адрес: г. Санкт-Петербург, Политехническая ул., 31</p>
+        <p>Телефон: 8 (800) 775-75-33</p>
+    </div>
+</div>
+</body>
+</html>

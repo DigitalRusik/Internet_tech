@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/x-icon" href="img/icon.ico">
+  <link rel="stylesheet" type="text/css" href="css/stylemain.css">
+  <title>ТУ- Главная страница</title>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <a class="TopHomeLink" href="/mainpage">
+        <img class="icon" src="img/headerUgolok.png" width="220" height="92">
+      </a>
+    </div>
+  </header>
+  <hr>
+  <ul align = "center">
+    <li><b href = "/mainpage">Главная</b></li>
+    <li><a href = "/mainpage/addresses">Адреса</a></li>
+    <li><a href = "/mainpage/myProducts">Мои товары</a></li>
+    <li><a href = "/mainpage/productlist">Каталог товаров</a></li>
+    <li><a href = "/mainpage/productsFromUsers">Товары от пользователей</a></li>
+    <li><a href = "/mainpage/basket">Корзина</a></li>
+    <li><a href = "/mainpage/techSupport">Тех. поддержка</a></li>
+  </ul>
+  <h1 th:text="'Вы вошли в систему под именем ' + ${username} + '.'"></h1>
+  <a href="../api/logout">Выйти из аккаунта</a>
+</body>
+</html>

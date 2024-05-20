@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ТУ- вход в систему</title>
+    <link rel="icon" type="image/x-icon" href="img/icon.ico">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="main">
+    <input type="checkbox" id="chk" aria-hidden="true">
+    <center><div id="erconts"></div></center>
+    <div class="signup">
+        <label for="chk" aria-hidden="true">Регистрация</label>
+        <input type="text" id="username" name="username" placeholder="Имя пользователя" required="">
+        <input type="text" id="email" name="email" placeholder="Эл. почта" required="">
+        <input type="password" id="pass" name="pass" placeholder="Пароль" required="">
+        <button id="btn_submit">Зарегистрироваться </button>
+    </div>
+
+    <div class="login">
+        <label for="chk" aria-hidden="true">Вход</label>
+        <center><h4><div id="lrconts"></div></h4></center>
+        <input type="text" id="lemail" name="lemail" placeholder="Эл. почта" required="">
+        <input type="password" id="lpass" name="lpass" placeholder="Пароль" required="">
+        <button id="lbtn_submit">Войти в систему</button>
+    </div>
+</div>
+</body>
+<script src="js/jQuery.js"></script>
+<script src="js/registration.js"></script>
+<script src="js/login.js"></script>
+</html>

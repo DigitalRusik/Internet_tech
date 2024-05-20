@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="../img/icon.ico">
+    <link rel="stylesheet" type="text/css" href="../css/stylemain.css">
+    <title>ТУ- Корзина</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100%;
+            background-size: cover;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 50px;
+            margin-bottom: 30px;
+        }
+
+        table {
+            margin: 0 auto;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #F8F8F8;
+        }
+
+        td:last-child {
+            font-weight: bold;
+        }
+
+        button {
+            color: white;
+            background-color: blue;
+            border-radius: 6px;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .btn-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        button[type="submit"]:hover {
+            background-color: red;
+        }
+        body {
+            margin: 0;
+            height: 100%;
+
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+         <a class="TopHomeLink" href="/mainpage">
+             <img class="icon" src="../img/headerUgolok.png" width="220" height="92">
+         </a>
+        </div>
+    </header>
+    <hr>
+    <ul align = "center">
+        <li><a href = "/mainpage">Главная</a></li>
+        <li><a href = "/mainpage/addresses">Адреса</a></li>
+        <li><a href = "/mainpage/myProducts">Мои товары</a></li>
+        <li><a href = "/mainpage/productlist">Каталог товаров</a></li>
+        <li><a href = "/mainpage/productsFromUsers">Товары от пользователей</a></li>
+        <li><b href = "/mainpage/basket">Корзина</b></li>
+        <li><a href = "/mainpage/techSupport">Тех. поддержка</a></li>
+    </ul>
+    <h1>Ваш заказ</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Название товара</th>
+            <th>Цена за шт.</th>
+            <th>Количество</th>
+            <th>Сумма руб.</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody id="cart-items">
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="3"></td>
+            <td id="total"></td>
+            <td></td>
+        </tr>
+        </tfoot>
+    </table>
+    <h1 style="text-align:left">Куда следует доставить заказ:</h1>
+    <form>
+        <input type="radio" id="Пункт выдачи 1" name="delivery" value="Пукнт выдачи 1">
+        <label for="Пункт выдачи 1">Пункт выдачи 1, г. Санкт-Петербург, Граждaнский пр-т., 114, корпус 1</label><br>
+
+        <input  type="radio" id="Пункт выдачи 2" name="delivery" value="Пункт выдачи 2">
+        <label for="Пункт выдачи 2">Пункт выдачи 2, г. Санкт-Петербург, пр. Просвещения, 34</label><br>
+
+        <input type="radio" id="Пункт выдачи 3" name="delivery" value="Пункт выдачи 3">
+        <label for="Пункт выдачи 3">Пункт выдачи 3, г. Санкт-Петербург, Комендантский пр., 13, корпус 1</label><br>
+
+        <input type="radio" id="Пункт выдачи 4" name="delivery" value="Пункт выдачи 4">
+        <label for="Пункт выдачи 4">Пункт выдачи 4, г. Санкт-Петербург, пр. Художников, 24к1</label><br>
+
+        <input type="radio" id="Пункт выдачи 5" name="delivery" value="Пункт выдачи 5">
+        <label for="Пункт выдачи 5">Пункт выдачи 5, г. Санкт-Петербург, Политехническая ул., 31</label><br>
+
+        <input type="radio" id="other" name="delivery" value="other">
+        <label for="other">Доставка курьером</label><br>
+
+        <div id="address" style="display: none;">
+            <label for="addr">Укажите адрес:</label><br>
+            <input type="text" id="addr" name="address"><br>
+        </div>
+        <label for="contact">Укажите ваши контактные данные:</label><br>
+        <input type="text" id="contact" name="contact"><br>
+        <p>Выберите дату доставки:
+            <input type="date" name="calendar" value=""
+                   max="2024-08-01" min="2023-06-01">
+        </p>
+        <button type="submit">Оформить заказ</button>
+    </form>
+
+    <script>
+        var deliveryRadios = document.querySelectorAll('input[type="radio"][name="delivery"]');
+        var addressDiv = document.getElementById('address');
+        function handleDeliveryChange(e) {
+            if (e.target.value === 'other') {
+                addressDiv.style.display = 'block';
+            } else {
+                addressDiv.style.display = 'none';
+            }
+        }
+        deliveryRadios.forEach(function(radio) {
+            radio.addEventListener('change', handleDeliveryChange);
+        });
+        var orderButton = document.querySelector('button[type=submit]');
+        orderButton.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            var selectedDelivery = document.querySelector('input[type="radio"][name="delivery"]:checked');
+            if (!selectedDelivery) {
+                alert('Выберите адрес доставки');
+                return;
+            }
+
+            var contactInput = document.getElementById('contact');
+            if (contactInput.value === '') {
+                alert('Введите свои контактные данные');
+                return;
+            }
+
+            alert('Заказ успешно оформлен!');
+        });
+    </script>
+    <script>
+        var otherInput = document.getElementById('other');
+        var addressDiv = document.getElementById('address');
+
+        otherInput.addEventListener('change', function() {
+            if (otherInput.checked) {
+                addressDiv.style.display = 'block';
+            } else {
+                addressDiv.style.display = 'none';
+            }
+        });
+    </script>
+    <script>
+        const orders = JSON.parse(localStorage.getItem("orders")) || [];
+        const cartItems = document.getElementById("cart-items");
+        const totalElement = document.getElementById("total");
+
+        let total = 0;
+
+        function renderOrder(order) {
+            const row = document.createElement("tr");
+            const name = document.createElement("td");
+            const price = document.createElement("td");
+            const amount = document.createElement("td");
+            const subtotal = document.createElement("td");
+            const removeButton = document.createElement("button");
+
+            name.textContent = order.name;
+            price.textContent = order.price;
+            amount.textContent = order.amount;
+            order.price = order.price.replace("&nbsp;", '');
+            subtotal.textContent = parseFloat(order.price) * parseFloat(order.amount);
+            total += parseFloat(order.price) * parseFloat(order.amount);
+
+            removeButton.textContent = "Удалить";
+            removeButton.addEventListener("click", () => {
+                const index = orders.indexOf(order);
+                if (index !== -1) {
+                    orders.splice(index, 1);
+                    localStorage.setItem("orders", JSON.stringify(orders));
+                    row.remove();
+                    updateTotal();
+                }
+            });
+
+            row.appendChild(name);
+            row.appendChild(price);
+            row.appendChild(amount);
+            row.appendChild(subtotal);
+            row.appendChild(removeButton);
+            cartItems.appendChild(row);
+        }
+
+        function updateTotal() {
+            totalElement.textContent = total;
+        }
+
+        orders.forEach(renderOrder);
+        updateTotal();
+    </script>
+</body>
+</html>

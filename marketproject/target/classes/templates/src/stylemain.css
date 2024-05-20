@@ -1,0 +1,29 @@
+header{
+    background-size: cover;
+}
+
+ul{
+    list-style: none;
+    marin: 0;
+    padding: 20px;
+    background-size: cover;
+}
+a{
+    font-size:30px;
+    padding: 20px;
+    color: #0c00ff;
+    text-decoration: none;
+}
+a:hover{
+    color: red;
+    text-decoration: none;
+}
+li{
+    display: inline;
+}
+b{
+    font-size: 30px;
+    padding: 20px;
+    color: red;
+    text-decoration: none;
+}
